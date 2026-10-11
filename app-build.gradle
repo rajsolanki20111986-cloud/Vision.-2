@@ -1,0 +1,109 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    namespace 'com.vision.app'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.vision.app"
+        minSdk 21
+        targetSdk 35
+        versionCode 4
+        versionName "4.0.0"
+        
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        viewBinding false
+        aidl false
+        renderScript false
+        resValues false
+        shaders false
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable false
+        }
+        debug {
+            minifyEnabled false
+            debuggable true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = '11'
+        freeCompilerArgs += [
+            '-Xopt-in=kotlin.RequiresOptIn'
+        ]
+    }
+
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-*.pro'
+        exclude 'META-INF/gradle/incremental.annotation.processors'
+    }
+}
+
+dependencies {
+    // Core Android Libraries
+    implementation 'androidx.core:core:1.13.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.window:window:1.2.0'
+
+    // AndroidX Lifecycle & Fragment
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.4'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4'
+    implementation 'androidx.activity:activity-ktx:1.9.2'
+    implementation 'androidx.fragment:fragment-ktx:1.8.1'
+
+    // AndroidX Services & Work
+    implementation 'androidx.accessibilityservice:accessibility:1.0.0'
+    implementation 'androidx.work:work-runtime-ktx:2.9.1'
+
+    // Kotlin & Coroutines
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.23'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1'
+
+    // Networking & JSON
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.12.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    // Google ML Kit (Vision APIs)
+    implementation 'com.google.mlkit:text-recognition:16.0.0'
+    implementation 'com.google.mlkit:text-recognition-korean:16.0.0'
+    implementation 'com.google.mlkit:vision-common:17.3.0'
+    implementation 'com.google.mlkit:object-detection:17.0.0'
+
+    // Google Generative AI (Gemini)
+    implementation 'com.google.ai.client.generativeai:google-generativeai:0.9.0'
+
+    // Material Design
+    implementation 'com.google.android.material:material:1.12.0'
+
+    // Media/Audio
+    implementation 'androidx.media:media:1.7.0'
+
+    // Permissions Handling
+    implementation 'com.google.android.gms:play-services-base:18.4.0'
+
+    // Testing
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
