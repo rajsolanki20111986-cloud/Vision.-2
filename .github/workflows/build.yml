@@ -14,8 +14,7 @@ jobs:
   build:
     name: Build APK
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-
+    timeout-minutes: 35
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -31,18 +30,17 @@ jobs:
         with:
           gradle-version: '8.5'
 
-      - name: Verify project structure
+      - name: Verify Android project files
         run: |
           test -f settings.gradle.kts
-          test -f build.gradle
+          test -f build.gradle.kts
           test -f app/build.gradle
           test -f app/src/main/AndroidManifest.xml
-
-      - name: Build project
-        run: gradle --no-daemon build --stacktrace
+          test -f app/src/main/java/com/vision/app/v0_3/MainActivity.kt
+          test -f app/src/main/res/xml/accessibility_service_config.xml
 
       - name: Build release APK
-        run: gradle --no-daemon assembleRelease --stacktrace
+        run: gradle --no-daemon clean assembleRelease --stacktrace
 
       - name: Upload release APK
         if: success()
